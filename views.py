@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import git
 import subprocess
+import os
 
 # Create your views here.
 def home(request):
@@ -15,6 +16,7 @@ def update_webhook(request):
     repo = git.Repo('/home/tanishashankpal/myprofile/myapp')
     repo.remotes.origin.pull()
     # python manage.py collectstatic --noinput
-    subprocess.run(["cd", "/home/tanishashankpal/myprofile"])
-    subprocess.run(["python", "manage.py", "collectstatic", "--noinput"])
-    return HttpResponse("Hello World!")
+    # subprocess.run(["cd", "/home/tanishashankpal/myprofile"])
+    os.chdir("/home/tanishashankpal/myprofile")
+    subprocess.run(["python", "manage.py", "collectstatic", "--noinput"], cwd='/home/tanishashankpal/myprofile')
+    return HttpResponse("Hello World5!")
