@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import git
 import subprocess
 
@@ -7,6 +8,7 @@ def home(request):
     # return HttpResponse("Hello World!")
     return render(request, 'base.html')
 
+@csrf_exempt
 def update_webhook(request):
     # function to handle webhook push from github
     # one more comment added
